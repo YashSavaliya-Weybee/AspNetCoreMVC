@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+<img src="~/images/logo.png" class="logo" alt="logo" />
+
+<img src="~/MyStaticFiles/Dummy.png" class="dummy" alt="dummy" />
+
+<h1>Welcome to HomePage</h1>
+<p>This is the page of our book store </p>
+
+@* #19------------------------------------------------------------------ *@
+@*@for (int i = 0; i < 53; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            <span>Welcome to  book Store (@i, @j)</span>
+        }
+        <br />
+    }
+    @{
+        var list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
+    }
+
+    @foreach (var item in list)
+    {
+        <h4>@item</h4>
+    }*@
+
+
+@* #18------------------------------------------------------------------ *@
+@*@{
+        int a = 10;
+    }
+    @if (a == 5)
+    {
+        a++;
+        <h1>Hello from if block @a</h1>
+    }
+    else if (a == 10)
+    {
+        <h1>Hello from else if block</h1>
+    }
+    else
+    {
+        <h1>Hello from else block</h1>
+    }
+
+    @{
+        int x = 1;
+        int y = 0;
+        <h1> Ternary - @( x == 10 ? y = 10 : y = 5 )</h1>
+    }*@
+
+@*@{
+        int a = 4;
+    }
+
+    @switch (a)
+    {
+        case 1:<h1>1</h1>
+            break;
+        case 2:<h1>2</h1>
+            break;
+        case 3:<h1>3</h1>
+            break;
+        case 4:<h1>5</h1>
+            break;
+        case 5:<h1>5</h1>
+            break;
+        default:<h1>0</h1>
+            break;
+    }*@
+
+@* #17------------------------------------------------------------------ *@
+@*<h3>@DateTime.Now</h3>
+            <h3>Sum = @(3+5)</h3>
+            @{
+        int a = 10;
+        int b = 20;
+        int c = a + b;
+    }
+            <h3>@(c)</h3>
+            <h3>My gmail - yash@123.com</h3>
+            <h3>My twiter - @@Yash1887</h3>
+*@
+
+
+@*<script>
+        $(document).ready(function () {
+            alert("Page Loded");
+        });
+    </script>*@
