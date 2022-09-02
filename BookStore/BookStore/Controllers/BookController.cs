@@ -3,6 +3,7 @@ using BookStore.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,12 +20,18 @@ namespace BookStore.Controllers
         public ViewResult GetAllBooks()
         {
             var data = _bookRepository.GetAllBooks();
-            return View();
+            return View(data);
         }
 
-        public BookModel GetBook(int id)
+        [Route("book-details/{id}", Name = "bookDetailsRoute")]
+
+        public ViewResult GetBook(int id)
         {
-            return _bookRepository.GetBookById(id);
+            dynamic data = new ExpandoObject();
+            data.book = _bookRepository.GetBookById(id);
+            data.Name = "Yash";
+
+            return View(data);
         }
 
         public List<BookModel> SearchBooks(string bookName, string authorName)

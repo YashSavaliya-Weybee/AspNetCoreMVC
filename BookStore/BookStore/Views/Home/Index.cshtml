@@ -1,94 +1,88 @@
-﻿
-@{
-    Layout = "_Layout";
+﻿@{
+    //dynamic data = ViewBag.Data;
+    //var bookInfo = ViewData["book"] as BookModel;
+    //ViewData["Title"] = "Home";
 }
 
-<img src="~/images/logo.png" class="logo" alt="logo" />
+@{
+    var book = ViewData["Book"] as BookModel;
+}
+<section class="text-center py-5">
+    <div class="container">
+        <h1>Welcome To Bookstore @*@ViewBag.Title*@ @*@ViewData["Property1"]*@ @ViewData["CustomProperty"] </h1>
+        @*<h1>Id - @bookInfo.ID</h1>
+            <h1>Author - @bookInfo.Author</h1>*@
 
-<img src="~/MyStaticFiles/Dummy.png" class="dummy" alt="dummy" />
+        <h1>Id - @book.ID</h1>
+        <h1>Author - @book.Title</h1>
+        <p class="lead text-muted">
+            @*@data.Id @data.Name<br />
 
-<h1>Welcome to HomePage</h1>
-<p>This is the page of our book store </p>
-
-@* #19------------------------------------------------------------------ *@
-@*@for (int i = 0; i < 53; i++)
-    {
-        for (int j = 0; j < 9; j++)
-        {
-            <span>Welcome to  book Store (@i, @j)</span>
-        }
-        <br />
-    }
-    @{
-        var list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
-    }
-
-    @foreach (var item in list)
-    {
-        <h4>@item</h4>
-    }*@
+                Id = @ViewBag.Type.ID <br />
+                Name = @ViewBag.Type.Author*@
 
 
-@* #18------------------------------------------------------------------ *@
-@*@{
-        int a = 10;
-    }
-    @if (a == 5)
-    {
-        a++;
-        <h1>Hello from if block @a</h1>
-    }
-    else if (a == 10)
-    {
-        <h1>Hello from else if block</h1>
-    }
-    else
-    {
-        <h1>Hello from else block</h1>
-    }
+            A good example of a paragraph contains a topic sentence, details and a conclusion. 'There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north. In the jungles, monkeys swing in the trees and elephants walk through the brush.
+        </p>
+        <p>
+            <a href="#" class="btn btn-primary my-2">Search books</a>
+        </p>
+    </div>
+</section>
 
-    @{
-        int x = 1;
-        int y = 0;
-        <h1> Ternary - @( x == 10 ? y = 10 : y = 5 )</h1>
-    }*@
+<div class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="card-img-top bg-light" width="100%" height="225"></svg>
+                    <div class="card-body">
+                        <p class="card-text">This section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View Details</a>
+                            </div>
+                            <small class="text-muted">Author Name</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="card-img-top bg-light" width="100%" height="225"></svg>
+                    <div class="card-body">
+                        <p class="card-text">This section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View Details</a>
+                            </div>
+                            <small class="text-muted">Author Name</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <svg class="card-img-top bg-light" width="100%" height="225"></svg>
+                    <div class="card-body">
+                        <p class="card-text">This section will be used to display the short description of book</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View Details</a>
+                            </div>
+                            <small class="text-muted">Author Name</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-@*@{
-        int a = 4;
-    }
-
-    @switch (a)
-    {
-        case 1:<h1>1</h1>
-            break;
-        case 2:<h1>2</h1>
-            break;
-        case 3:<h1>3</h1>
-            break;
-        case 4:<h1>5</h1>
-            break;
-        case 5:<h1>5</h1>
-            break;
-        default:<h1>0</h1>
-            break;
-    }*@
-
-@* #17------------------------------------------------------------------ *@
-@*<h3>@DateTime.Now</h3>
-            <h3>Sum = @(3+5)</h3>
-            @{
-        int a = 10;
-        int b = 20;
-        int c = a + b;
-    }
-            <h3>@(c)</h3>
-            <h3>My gmail - yash@123.com</h3>
-            <h3>My twiter - @@Yash1887</h3>
-*@
-
-
-@*<script>
+@section scripts{
+    <script>
         $(document).ready(function () {
-            alert("Page Loded");
-        });
-    </script>*@
+            /*alert("Document is ready");*/
+        })
+    </script>
+}
