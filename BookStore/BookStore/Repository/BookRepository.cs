@@ -1,4 +1,6 @@
-﻿using BookStore.Models;
+﻿using BookStore.Data;
+using BookStore.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,71 @@ namespace BookStore.Repository
 {
     public class BookRepository
     {
-        public List<BookModel> GetAllBooks()
+        private readonly BookStoreContext _context = null;
+
+        public BookRepository(BookStoreContext context)
         {
-            return DataDource();
+            _context = context;
         }
-        public BookModel GetBookById(int id)
+
+        public async Task<int> AddNewBook(BookModel model)
         {
-            return DataDource().Where(x => x.ID == id).FirstOrDefault();
+            var newBook = new Books()
+            {
+                Author = model.Author,
+                Title = model.Title,
+                Description = model.Description,
+                Language = model.Language,
+                TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow
+            };
+
+            await _context.Books.AddAsync(newBook);
+            await _context.SaveChangesAsync();
+            return newBook.ID;
+        }
+
+        public async Task<List<BookModel>> GetAllBooks()
+        {
+            var books = new List<BookModel>();
+            var getAllBook = await _context.Books.ToListAsync();
+            if (getAllBook?.Any() == true)
+            {
+                foreach (var book in getAllBook)
+                {
+                    books.Add(new BookModel()
+                    {
+                        ID = book.ID,
+                        Category = book.Category,
+                        Title = book.Title,
+                        Author = book.Author,
+                        Language = book.Language,
+                        Description = book.Description,
+                        TotalPages = book.TotalPages
+                    });
+                }
+            }
+            return books;
+        }
+        public async Task<BookModel> GetBookById(int id)
+        {
+            var book = await _context.Books.FindAsync(id);
+            if (book != null)
+            {
+                var bookDetails = new BookModel()
+                {
+                    ID = book.ID,
+                    Category = book.Category,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Language = book.Language,
+                    Description = book.Description,
+                    TotalPages = book.TotalPages
+                };
+                return bookDetails;
+            }
+            return null;
         }
         public List<BookModel> SearchBook(string title, string AuthorName)
         {

@@ -9,19 +9,17 @@
 }
 <section class="text-center py-5">
     <div class="container">
-        <h1>Welcome To Bookstore @*@ViewBag.Title*@ @*@ViewData["Property1"]*@ @ViewData["CustomProperty"] </h1>
-        @*<h1>Id - @bookInfo.ID</h1>
-            <h1>Author - @bookInfo.Author</h1>*@
-
-        <h1>Id - @book.ID</h1>
-        <h1>Author - @book.Title</h1>
+        <h1>Welcome To Bookstore @ViewData["CustomProperty"] </h1>
+        <environment names="Development">
+            <h3>Development</h3>
+        </environment>
+        <environment include="Development">
+            <h3>Development</h3>
+        </environment>
+        <environment exclude="Development">
+            <h3>Production</h3>
+        </environment>
         <p class="lead text-muted">
-            @*@data.Id @data.Name<br />
-
-                Id = @ViewBag.Type.ID <br />
-                Name = @ViewBag.Type.Author*@
-
-
             A good example of a paragraph contains a topic sentence, details and a conclusion. 'There are many different kinds of animals that live in China. Tigers and leopards are animals that live in China's forests in the north. In the jungles, monkeys swing in the trees and elephants walk through the brush.
         </p>
         <p>
