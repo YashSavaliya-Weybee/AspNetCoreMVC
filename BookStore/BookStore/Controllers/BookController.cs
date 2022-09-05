@@ -39,26 +39,15 @@ namespace BookStore.Controllers
 
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            //ViewBag.language = GetLanguage().Select(x => new SelectListItem()
+            //ViewBag.language = new List<SelectListItem>()
             //{
-            //    Text = x.Text,
-            //    Value = x.id.ToString()
-            //}).ToList();
-
-            var group1 = new SelectListGroup() { Name = "Group 1" };
-            var group2 = new SelectListGroup() { Name = "Group 2" };
-            var group3 = new SelectListGroup() { Name = "Group 3" };
-
-            ViewBag.language = new List<SelectListItem>()
-            {
-                new SelectListItem(){Text = "English", Value = "1", Group = group1},
-                new SelectListItem(){Text = "Hindi", Value = "2", Group = group2},
-                new SelectListItem(){Text = "Gujarati", Value = "3", Group = group2},
-                new SelectListItem(){Text = "Tamil", Value = "4", Group = group1},
-                new SelectListItem(){Text = "Urdu", Value = "5", Group = group3},
-                new SelectListItem(){Text = "Chinese", Value = "6", Group = group3}
-            };
-
+            //    new SelectListItem(){Text = "English", Value = "1"},
+            //    new SelectListItem(){Text = "Hindi", Value = "2"},
+            //    new SelectListItem(){Text = "Gujarati", Value = "3"},
+            //    new SelectListItem(){Text = "Tamil", Value = "4"},
+            //    new SelectListItem(){Text = "Urdu", Value = "5"},
+            //    new SelectListItem(){Text = "Chinese", Value = "6"}
+            //};
 
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
@@ -77,8 +66,18 @@ namespace BookStore.Controllers
                 }
 
             }
+
+            //ViewBag.language = new List<SelectListItem>()
+            //{
+            //    new SelectListItem(){Text = "English", Value = "1"},
+            //    new SelectListItem(){Text = "Hindi", Value = "2"},
+            //    new SelectListItem(){Text = "Gujarati", Value = "3"},
+            //    new SelectListItem(){Text = "Tamil", Value = "4"},
+            //    new SelectListItem(){Text = "Urdu", Value = "5"},
+            //    new SelectListItem(){Text = "Chinese", Value = "6"}
+            //};
+
             ViewBag.language = new SelectList(GetLanguage(), "id", "Text");
-            //ModelState.AddModelError("", "This is my custom error message");
             return View();
         }
 
