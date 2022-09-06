@@ -26,7 +26,7 @@
 
 
 
-    <form method="post" enctype="multipart/form-data" data-ajax="true" data-ajax-complete="myComplete" data-ajax-success="mySuccess" data-ajax-Failure="myFailure" data-ajax-loading="#myLoader" asp-action="AddNewBook" asp-controller="Book">
+    <form method="post" enctype="multipart/form-data" asp-action="AddNewBook" asp-controller="Book">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="form-group">
@@ -71,21 +71,26 @@
         </div>
 
         <div class="form-group">
+            <label asp-for="GalleryFiles"></label>
+            <div class="mb-3">
+                <input class="form-control" asp-for="GalleryFiles" id="formFile">
+                <label for="formFile" class="form-label"></label>
+            </div>
+            <span asp-validation-for="GalleryFiles" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="BookPdf"></label>
+            <div class="mb-3">
+                <input class="form-control" asp-for="BookPdf" id="formFile">
+                <label for="formFile" class="form-label"></label>
+            </div>
+            <span asp-validation-for="BookPdf" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
             <input type="submit" value="Add Book" class="btn btn-primary" />
         </div>
     </form>
 </div>
-
-@section scripts {
-    <script>
-        function myComplete() {
-            alert("From Complete");
-        }
-        function mySuccess() {
-            alert("From Success");
-        }
-        function myFailure() {
-            alert("From Failure");
-        }
-    </script>
-}
