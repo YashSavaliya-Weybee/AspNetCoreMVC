@@ -49,26 +49,34 @@ namespace BookStore.Repository
 
         public async Task<List<BookModel>> GetAllBooks()
         {
-            var books = new List<BookModel>();
-            var getAllBook = await _context.Books.ToListAsync();
-            if (getAllBook?.Any() == true)
+            return await _context.Books.Select(book => new BookModel()
             {
-                foreach (var book in getAllBook)
-                {
-                    books.Add(new BookModel()
-                    {
-                        ID = book.ID,
-                        Category = book.Category,
-                        Title = book.Title,
-                        Author = book.Author,
-                        LanguageId = book.LanguageId,
-                        Description = book.Description,
-                        TotalPages = book.TotalPages,
-                        CoverImageUrl = book.CoverImageUrl
-                    });
-                }
-            }
-            return books;
+                ID = book.ID,
+                Category = book.Category,
+                Title = book.Title,
+                Author = book.Author,
+                LanguageId = book.LanguageId,
+                Description = book.Description,
+                TotalPages = book.TotalPages,
+                CoverImageUrl = book.CoverImageUrl
+            }).ToListAsync();
+        }
+
+
+
+        public async Task<List<BookModel>> GetTopBookAsync(int count)
+        {
+            return await _context.Books.Select(book => new BookModel()
+            {
+                ID = book.ID,
+                Category = book.Category,
+                Title = book.Title,
+                Author = book.Author,
+                LanguageId = book.LanguageId,
+                Description = book.Description,
+                TotalPages = book.TotalPages,
+                CoverImageUrl = book.CoverImageUrl
+            }).Take(count).ToListAsync();
         }
         public async Task<BookModel> GetBookById(int id)
         {
