@@ -25,6 +25,12 @@ namespace BookStore
             services.AddControllersWithViews();
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            //----To disable client side validation
+            //services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(option =>
+            //{
+            //    option.HtmlHelperOptions.ClientValidationEnabled = false;
+            //});
 #endif
 
             services.AddScoped<BookRepository, BookRepository>();
@@ -41,19 +47,11 @@ namespace BookStore
 
             app.UseStaticFiles();
 
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
-                RequestPath = "/MyStaticFiles"
-            });
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                //endpoints.MapControllerRoute(
-                //    name: "Default", pattern: "bookApp/{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
