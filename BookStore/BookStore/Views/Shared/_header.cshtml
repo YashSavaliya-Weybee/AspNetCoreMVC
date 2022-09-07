@@ -1,5 +1,11 @@
 ﻿@*@inject BookStore.Repository.IBookRepository _bookRepo*@
-@inject Microsoft.Extensions.Configuration.IConfiguration _configuration
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration _configuration
+
+@{
+    var newBook = _configuration.GetSection("NewBookAlert");
+}
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -40,4 +46,12 @@
             </div>
         </div>
     </nav>
+
+    @if (newBook.GetValue<bool>("DisplayNewBookAlert"))
+    {
+        <div class="alert alert-info" role="alert">
+            @(newBook.GetValue<string>("BookName"))
+        </div>
+    }
+
 </header>
