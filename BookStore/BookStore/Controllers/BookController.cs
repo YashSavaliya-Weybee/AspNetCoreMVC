@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    [Route("[controller]/[action]")]
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepository = null;

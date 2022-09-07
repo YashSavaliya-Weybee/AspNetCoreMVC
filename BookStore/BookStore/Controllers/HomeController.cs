@@ -1,5 +1,6 @@
 ﻿using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -8,20 +9,28 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
-    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
-        [Route("~/")]
+        private readonly IConfiguration configuration;
+
+        public HomeController(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
         public ViewResult Index()
         {
+            var result = configuration["AppName"];
+            var key1 = configuration["infoObj:key1"];
+            var key2 = configuration["infoObj:key2"];
+            var key3 = configuration["infoObj:key3:key3obj1"];
             return View();
         }
-        //[HttpGet("about-us", Name = "aboutus")]
+
         public ViewResult AboutUs()
         {
             return View();
         }
-        //[Route("contact-us", Name = "contact-us")]
+
         public ViewResult ContactUs()
         {
             return View();
