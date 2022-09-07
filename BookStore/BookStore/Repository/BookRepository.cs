@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Repository
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context = null;
 
@@ -105,5 +105,9 @@ namespace BookStore.Repository
             return null;
         }
 
+        public string GetAppName()
+        {
+            return "Book store";
+        }
     }
 }

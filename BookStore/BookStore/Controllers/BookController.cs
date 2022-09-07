@@ -13,25 +13,27 @@ using System.Threading.Tasks;
 
 namespace BookStore.Controllers
 {
+    [Route("[controller]/[action]")]
     public class BookController : Controller
     {
-        private readonly BookRepository _bookRepository = null;
-        private readonly LanguageRepository _languageRepository = null;
+        private readonly IBookRepository _bookRepository = null;
+        private readonly ILanguageRepository _languageRepository = null;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public BookController(BookRepository bookRepository, LanguageRepository languageRepository, IWebHostEnvironment webHostEnvironment)
+        public BookController(IBookRepository bookRepository, ILanguageRepository languageRepository, IWebHostEnvironment webHostEnvironment)
         {
             _bookRepository = bookRepository;
             _languageRepository = languageRepository;
             _webHostEnvironment = webHostEnvironment;
         }
 
+        [Route("all-books")]
         public async Task<ViewResult> GetAllBooks()
         {
             var data = await _bookRepository.GetAllBooks();
             return View(data);
         }
 
-        [Route("book-details/{id}", Name = "bookDetailsRoute")]
+        [Route("~/book-details/{id:int:min(1)}", Name = "bookDetailsRoute")]
 
         public async Task<ViewResult> GetBook(int id)
         {
@@ -46,8 +48,6 @@ namespace BookStore.Controllers
 
         public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
-            ViewBag.language = new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
-
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
             return View();
@@ -93,7 +93,6 @@ namespace BookStore.Controllers
                     return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
                 }
             }
-            ViewBag.language = new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
 
             return View();
         }

@@ -2,6 +2,8 @@
     ViewData["Title"] = "Home";
 }
 
+@*@inject BookStore.Repository.IBookRepository _bookRepository*@
+
 @{
     var book = ViewData["Book"] as BookModel;
 }
@@ -13,6 +15,11 @@
         <p>
             <a href="#" class="btn btn-primary my-2">Search books</a>
         </p>
+
+        @*@foreach (var item in await _bookRepository.GetAllBooks())
+            {
+                <h4>@item.Title - @item.Author - @item.Description</h4>
+            }*@
     </div>
 </section>
 
