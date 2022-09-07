@@ -1,19 +1,17 @@
-﻿@*@inject BookStore.Repository.IBookRepository _bookRepo*@
+﻿@inject BookStore.Repository.IBookRepository _bookRepo
 
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration _configuration
 
-@{
-    var newBook = _configuration.GetSection("NewBookAlert");
-}
+@inject Microsoft.Extensions.Options.IOptions<NewBookAlertConfig> _newBookAlertconfiguration
 
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                 <img src="~/images/logo.png" width="30" height="30" asp-append-version="true" />
-                @*@_bookRepo.GetAppName()*@
-                @_configuration["AppName"]
+                @_bookRepo.GetAppName()
+
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -47,10 +45,10 @@
         </div>
     </nav>
 
-    @if (newBook.GetValue<bool>("DisplayNewBookAlert"))
+    @if (_newBookAlertconfiguration.Value.DisplayNewBookAlert)
     {
         <div class="alert alert-info" role="alert">
-            @(newBook.GetValue<string>("BookName"))
+            @_newBookAlertconfiguration.Value.BookName
         </div>
     }
 

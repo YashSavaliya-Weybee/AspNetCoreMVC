@@ -1,6 +1,7 @@
 ﻿using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -11,29 +12,17 @@ namespace BookStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration configuration;
+        private readonly NewBookAlertConfig _newBookAlertConfiguration;
 
-        public HomeController(IConfiguration _configuration)
+        public HomeController(IOptions<NewBookAlertConfig> newBookAlertConfiguration)
         {
-            configuration = _configuration;
+            _newBookAlertConfiguration = newBookAlertConfiguration.Value;
         }
+
         public ViewResult Index()
         {
+            bool isDisplay = _newBookAlertConfiguration.DisplayNewBookAlert;
 
-            //var newBook = configuration.GetSection("NewBookAlert");
-            //var result = newBook.GetValue<bool>("DisplayNewBookAlert");
-            //var result2 = newBook.GetValue<string>("BookName");
-            //var result1 = newBook["DisplayNewBookAlert"];
-
-
-            //var result = configuration.GetValue<bool>("NewBookAlert:DisplayNewBookAlert");
-            //var result2 = configuration.GetValue<string>("NewBookAlert:BookName");
-            //var result1 = configuration["NewBookAlert:DisplayNewBookAlert"];
-
-            //var result = configuration["AppName"];
-            //var key1 = configuration["infoObj:key1"];
-            //var key2 = configuration["infoObj:key2"];
-            //var key3 = configuration["infoObj:key3:key3obj1"];
             return View();
         }
 
