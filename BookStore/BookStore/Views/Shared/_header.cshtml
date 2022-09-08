@@ -5,6 +5,11 @@
 
 @inject Microsoft.Extensions.Options.IOptionsSnapshot<NewBookAlertConfig> _newBookAlertconfiguration
 
+@{
+    var newBookAlertConfiguration = _newBookAlertconfiguration.Get("InternalBook");
+    var thirdPartyBookConfiguration = _newBookAlertconfiguration.Get("ThirdPartyBook");
+}
+
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
@@ -45,10 +50,17 @@
         </div>
     </nav>
 
-    @if (_newBookAlertconfiguration.Value.DisplayNewBookAlert)
+    @if (newBookAlertConfiguration.DisplayNewBookAlert)
     {
         <div class="alert alert-info" role="alert">
-            @_newBookAlertconfiguration.Value.BookName
+            @newBookAlertConfiguration.BookName
+        </div>
+    }
+
+    @if (thirdPartyBookConfiguration.DisplayNewBookAlert)
+    {
+        <div class="alert alert-info" role="alert">
+            @thirdPartyBookConfiguration.BookName
         </div>
     }
 
